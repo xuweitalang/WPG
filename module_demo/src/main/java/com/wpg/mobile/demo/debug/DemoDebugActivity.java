@@ -6,7 +6,7 @@ import com.wpg.mobile.common.base.BaseActivity;
 import com.wpg.mobile.demo.databinding.DemoActivityDebugBinding;
 
 
-public class Demo_DebugActivity extends BaseActivity<DemoActivityDebugBinding> {
+public class DemoDebugActivity extends BaseActivity<DemoActivityDebugBinding> {
 
     @Override
     protected void initData() {
@@ -15,7 +15,7 @@ public class Demo_DebugActivity extends BaseActivity<DemoActivityDebugBinding> {
 
     @Override
     protected void initView() {
-        viewBinding.tvTest.setOnClickListener(v -> Toast.makeText(Demo_DebugActivity.this, viewBinding.tvTest.getText().toString(), Toast.LENGTH_LONG).show());
+        viewBinding.tvTest.setOnClickListener(v -> Toast.makeText(DemoDebugActivity.this, viewBinding.tvTest.getText().toString(), Toast.LENGTH_LONG).show());
     }
 
     @Override

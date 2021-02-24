@@ -8,7 +8,7 @@ import com.wpg.mobile.common.base.BaseActivity;
 import com.wpg.mobile.demo.databinding.DemoActivityMainBinding;
 
 @Route(path = RoutePath.ROUTE_DEMO_MAIN)
-public class Demo_MainActivity extends BaseActivity<DemoActivityMainBinding> {
+public class DemoMainActivity extends BaseActivity<DemoActivityMainBinding> {
     @Autowired
     String test;
 

@@ -7,7 +7,7 @@ import com.wpg.mobile.common.constant.Cons;
 import com.wpg.mobile.demo.BuildConfig;
 
 
-public class Demo_DebugApplication extends BaseApplication {
+public class DemoDebugApplication extends BaseApplication {
 
     @Override
     public void onCreate() {
