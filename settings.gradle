@@ -1,0 +1,4 @@
+include ':module_demo'
+include ':module_common'
+include ':app'
+rootProject.name = "WPG"
