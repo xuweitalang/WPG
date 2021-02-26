@@ -1,9 +1,10 @@
 package com.wpg.mobile.home;
 
-import android.util.Log;
-
+import com.orhanobut.logger.Logger;
 import com.wpg.mobile.common.base.mvp.BasePresenter;
-import com.wpg.mobile.common.http.RxSchedulers;
+import com.wpg.mobile.common.http.BaseHttpResult;
+import com.wpg.mobile.common.http.BaseObserver;
+import com.wpg.mobile.main.entity.User;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -27,12 +28,18 @@ public class HomePresenter extends BasePresenter<HomeContract.Model, HomeContrac
         request.put("loginName", "huangdp");
         request.put("password", "123456");
 
-        addDispose(mModel.login(request).compose(RxSchedulers.applySchedulers())
-                .subscribe(userBaseHttpResult -> {
-                    if (userBaseHttpResult.isSuccess()) {
-                        Log.d(TAG, "login: " + userBaseHttpResult.getResultData().toString());
-                        mView.loginSuccess(userBaseHttpResult.getResultData());
+        mModel.login(request).compose(applyBinding())
+                .subscribe(new BaseObserver<User>(mView) {
+                    @Override
+                    public void onSuccess(BaseHttpResult<User> result) {
+                        Logger.d(TAG, "login: " + result.getResultData().toString());
+                        mView.loginSuccess(result.getResultData());
                     }
-                }));
+
+                    @Override
+                    public void onFailure(String errMsg, boolean isNetError) {
+                        Logger.e(errMsg);
+                    }
+                });
     }
 }

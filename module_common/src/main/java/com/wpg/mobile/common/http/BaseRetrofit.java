@@ -15,52 +15,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
  */
 public class BaseRetrofit {
 
-//    private Retrofit mRetrofit;
-//
-//    //构造器私有，这个工具类只有一个实例
-//    public BaseRetrofit(String url) {
-//        OkHttpClient.Builder httpClientBuilder = new OkHttpClient.Builder();
-//        httpClientBuilder.connectTimeout(HttpConstant.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-//                .readTimeout(HttpConstant.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-//                .writeTimeout(HttpConstant.DEFAULT_TIMEOUT, TimeUnit.SECONDS)
-//                .addInterceptor(new HttpLoggingInterceptor())
-//                .addInterceptor(new HeaderInterceptor())
-//                .retryOnConnectionFailure(true); // 错误重连
-//        mRetrofit = new Retrofit.Builder()
-//                .client(httpClientBuilder.build())
-//                .addConverterFactory(GsonConverterFactory.create())
-//                .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
-//                .baseUrl(url)
-//                .build();
-//    }
-//
-//
-//    /**
-//     * 静态内部类单例模式
-//     *
-//     * @return
-//     */
-//    public static BaseRetrofit getInstance() {
-//        return BaseRetrofit.Inner.retrofitManager;
-//    }
-//
-//    private static class Inner {
-//        private static final BaseRetrofit retrofitManager = new BaseRetrofit("");
-//    }
-//
-//
-//    /**
-//     * 利用泛型传入接口class返回接口实例
-//     *
-//     * @param ser 类
-//     * @param <T> 类的类型
-//     * @return Observable
-//     */
-//    public <T> T create(Class<T> ser) {
-//        return mRetrofit.create(ser);
-//    }
-
-
     private static OkHttpClient client;
     private static volatile Retrofit retrofit;
 
@@ -79,7 +33,6 @@ public class BaseRetrofit {
 
                     client = new OkHttpClient
                             .Builder()
-//                          .cookieJar(new CookieJarImpl(new PersistentCookieStore(App.getContext()))); //cookie 相关
                             .addInterceptor(httpLoggingInterceptor) //日志,所有的请求响应
 //                            .addInterceptor(new HeaderInterceptor(getRequestHeader())) // token过滤
 //                            .addInterceptor(new ParameterInterceptor(getRequestParams()))  //公共参数添加
@@ -93,7 +46,6 @@ public class BaseRetrofit {
                             .readTimeout(HttpConstant.DEFAULT_TIMEOUT, TimeUnit.SECONDS)//读取超时时间
                             .writeTimeout(HttpConstant.DEFAULT_TIMEOUT, TimeUnit.SECONDS)//写入超时时间
                             .retryOnConnectionFailure(false)//连接不上是否重连,false不重连
-
                             .build();
 
                     // 获取retrofit的实例

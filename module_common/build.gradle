@@ -23,6 +23,7 @@ android {
         versionCode rootProject.ext.androidId.versionCode
         versionName rootProject.ext.androidId.versionName
 
+
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
         //限制资源命名规范，以"common_"开头
         resourcePrefix "common_"

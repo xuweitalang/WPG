@@ -47,7 +47,7 @@ public abstract class BaseObserver<T> implements Observer<BaseHttpResult<T>> {
             onSuccess(result);
         } else {
             //TODO API异常处理
-//            onFailure(result., false);
+            onFailure(result.getErrorMessage(), false);
         }
     }
 

@@ -7,8 +7,11 @@ import androidx.lifecycle.OnLifecycleEvent;
 
 import org.greenrobot.eventbus.EventBus;
 
+import io.reactivex.ObservableTransformer;
+import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+import io.reactivex.schedulers.Schedulers;
 
 /**
  * @Author: xuwei
@@ -18,6 +21,11 @@ import io.reactivex.disposables.Disposable;
 public abstract class BasePresenter<M extends IModel, V extends IView> implements IPresenter<V>, LifecycleObserver {
     protected M mModel;
     protected V mView;
+
+    public V getView() {
+        return mView;
+    }
+
     private CompositeDisposable mCompositeDisposable;
 
     @Override
@@ -66,6 +74,29 @@ public abstract class BasePresenter<M extends IModel, V extends IView> implement
             this.mModel = null;
         }
         this.mView = null;
+    }
+
+
+    /**
+     * Binds the observable to the fragment lifecycle
+     */
+    protected <T> ObservableTransformer<T, T> applyBinding() {
+        return upstream -> upstream
+                .doOnSubscribe(this::bindToLifecycle)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread());
+    }
+
+    /**
+     * Binds a disposable to this presenter lifecycle
+     *
+     * @param d Disposable to be added
+     */
+    protected void bindToLifecycle(Disposable d) {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = new CompositeDisposable();
+        }
+        mCompositeDisposable.add(d);
     }
 
     @OnLifecycleEvent(Lifecycle.Event.ON_DESTROY)

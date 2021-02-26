@@ -1,4 +1,4 @@
-package com.netease.common.utils
+package com.wpg.mobile.common.utils
 
 import android.content.Context
 import android.view.MotionEvent

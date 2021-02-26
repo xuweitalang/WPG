@@ -12,8 +12,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.viewbinding.ViewBinding;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.netease.common.utils.CommonUtil;
-import com.netease.common.utils.KeyBoardUtil;
+import com.wpg.mobile.common.utils.CommonUtil;
+import com.wpg.mobile.common.utils.KeyBoardUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
